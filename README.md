@@ -1,4 +1,4 @@
-ecommerce-day-two
+ecommerce-day-two (updated for day three - see after step 8)
 =================
 
 ## Objectives
@@ -107,3 +107,55 @@ The create will POST when the 'Create' button is clicked.
 The edit will first GET the details to populate the form fields and then do a PUT when the 'Save' button is clicked.
 
 ##Step 8: If you have time, make it pretty using bootstrap, another library, or design it yourself
+
+#Day Three
+##Step 1: Indexing
+Add indexing for the email field on customer and the name field on products. This will make our api calls much quicker in the future as the application and data grow.
+
+##Step 2: Add more ways to query
+Exapand on the query function in the product service layer that we built to use _id and name.
+
+On your `GET /products` add a query string parameter called `query` that will include key words that you define. 
+
+These queries are based on the following objects in mongo:
+```json
+[
+    {
+        "_id": "5447e176e28406c36bbe9d2a",
+        "name": "iPhone 6 Plus",
+        "description": "Our best iPhone - now HUGER!",
+        "price": 269.99,
+        "__v": 0,
+        "active": true
+    },
+    {
+        "_id": "544818a3eb501040088f381a",
+        "name": "iPhone 6",
+        "description": "Our best iPhone - now as big as android",
+        "price": 199.99,
+        "__v": 0,
+        "active": true
+    }
+]
+```
+Below are some examples of a request you might support - yours do not have to be in this format:
+
+The following request: 
+
+`http://localhost:8888/products?query=name-contains:iPhone+max-price:200.00` 
+
+Should return:
+```json
+{
+    "_id": "544818a3eb501040088f381a",
+    "name": "iPhone 6",
+    "description": "Our best iPhone - now as big as android",
+    "price": 199.99,
+    "__v": 0,
+    "active": true
+}
+```
+
+* Support querying products given a min or max price or both min and max prices
+* Support searching for products by name - if I have a product named iPhone 6 I should be able to retrieve it if I pass in iPhone or 6
+* Add other querying that you think would be helpful to your users
