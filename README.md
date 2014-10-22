@@ -1,4 +1,4 @@
-ecommerce-day-two (updated for day three - see after step 8)
+ecommerce-day-two (updated see [Day Three](#day-three) below)
 =================
 
 ## Objectives
