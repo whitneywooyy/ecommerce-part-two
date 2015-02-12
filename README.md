@@ -1,4 +1,4 @@
-ecommerce-day-two
+eCommerce Project - Day 2
 =================
 
 ## Objectives
