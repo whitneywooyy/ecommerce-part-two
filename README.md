@@ -8,7 +8,7 @@ Continue creating a full-stack e-commerce application.
 ## Resources
 * [migrate] (https://github.com/tj/node-migrate)
 
-## Step 1: Seed Products - using migrations
+### Step 1: Seed Products - using migrations
 
 Let's use the handy migrate module to seed a product into your DB.
 
@@ -21,7 +21,7 @@ Let's use the handy migrate module to seed a product into your DB.
 * Create and save your new products in the `exports.up` function - use [this gist](https://gist.github.com/cahlan/c5e1f30964599f80d92e) as a guide for how you could do your migration.
 * Run `migrate` when complete to automatically seed your data in Mongo.
 
-##Step 2: Create CRUD (Create, Retrieve, Update, Delete) api routes for your mongo resources
+### Step 2: Create CRUD (Create, Retrieve, Update, Delete) api routes for your mongo resources
 
 * Install and require your dependencies
 
@@ -53,10 +53,10 @@ app.get('/customers/:id', CustomerController.getCustomer);
 app.delete('/customers/:id', CustomerController.deleteCustomer);
 ```
 
-##Step 4: Testing your API
+### Step 3: Testing your API
 Make sure all operations are working as expected
 
-##Step 5: Create an angular app that can consume this API
+### Step 4: Create an angular app that can consume this API
 
 Create templates for viewing lists and individual detailed resources
 
@@ -68,7 +68,7 @@ Create templates for viewing lists and individual detailed resources
 
 * Once your templates and angular routing is done, load the pages to see if you're retrieving data
 
-##Step 7: Modifying Data
+### Step 5: Modifying Data
 Integrate the logic within your angular app to create/modify/delete Products and Customers
 
 * Create and 'edit' template for the following:
@@ -81,12 +81,12 @@ Create an angular controller for creating and one for editing.
 The create will POST when the 'Create' button is clicked.
 The edit will first GET the details to populate the form fields and then do a PUT when the 'Save' button is clicked.
 
-##Step 8: If you have time, make it pretty using bootstrap, another library, or design it yourself
+### Step 6: If you have time, make it pretty using bootstrap, another library, or design it yourself
 
-##Step 9: Indexing
+### Step 7: Indexing
 Add indexing for the email field on customer and the name field on products. This will make our api calls much quicker in the future as the application and data grow.
 
-##Step 10: Add more ways to query
+### Step 8: Add more ways to query
 Expand on the controllers that we built to be able to query by name as well as _id.
 
 On your `GET /products` add a query string parameter called `query` that will include key words that you define. 
