@@ -3,30 +3,29 @@ eCommerce Project - Day 2
 
 ## Objectives
 
-Combine what we've learned about the front-end with our new mongo knowledge to create our ecommerce website.
+Continue creating a full-stack e-commerce application.
 
 ## Resources
 * [migrate] (https://github.com/tj/node-migrate)
-* [mongoose] (https://github.com/LearnBoost/mongoose)
 
 ## Step 1: Seed Products - using migrations
 
-Seed at least 3 products
+Let's use the handy migrate module to seed a product into your DB.
 
 * Install migrate globally `npm i migrate -g`
 * Navigate to the root of your application
-* Run `migrate create add-products` in your terminal at the root of your application
-* A new file called 00*-add-products.js should have been created within /migrations
+* Run `migrate create add-product` in your terminal at the root of your application
+* A new file called 00*-add-product.js should have been created within /migrations
 * `require` the module in your code where you initialize your mongoose connection
 * `require` your Product module
-* Create and save your new products in the `exports.up` function - use our [ecommerce day one solutions branch] (https://github.com/DevMountain/ecommerce-day-one/tree/solution) as a guide for migrations
+* Create and save your new products in the `exports.up` function - use [this gist](https://gist.github.com/cahlan/c5e1f30964599f80d92e) as a guide for how you could do your migration.
+* Run `migrate` when complete to automatically seed your data in Mongo.
 
-##Step 2: Create CRUD api routes for your mongo resources
+##Step 2: Create CRUD (Create, Retrieve, Update, Delete) api routes for your mongo resources
 
 * Install and require your dependencies
-  * express
 
-* Set up your route endpoints:
+* In your server.js, set up your route endpoints:
 
 ####/products
 GET
@@ -46,44 +45,19 @@ GET
 PUT
 DELETE
 
-####/customers/:customer_id/addresses
-GET
-POST
+* Create controllers for each model in a "controllers" folder (e.g. "CustomerController, ProductController", etc)
+* Connect controller functions for each CRUD operation to routes in your server.js file. For example, 
 
-####/customers/:customer_id/addresses/:id
-GET
-PUT
-DELETE
+```javascript
+app.get('/customers/:id', CustomerController.getCustomer);
+app.delete('/customers/:id', CustomerController.deleteCustomer);
+```
 
-####/customers/:customer_id/phone-numbers
-GET
-POST
-
-####/customers/:customer_id/phone-numbers/:id
-GET
-PUT
-DELETE
-
-##Step 3: Create a service layer
-These services will interract with mongoose to add/modify your mongo data. You then call these services from your routes.
-
-* Create /lib/services folder
-* Create the following javascript files:
-  * customer-service.js
-  * product-service.js
-* Add functions for each CRUD operation and implement mongoose
-  * getAll - `Product.find()` - where Product is your mongoose model
-  * getById - `Product.findOne({_id: 1234})`
-  * create - `new Product({set fields from function params}).save...`
-  * update - `Product.findOne({_id: 1234})... modify and save`
-  * delete - `Product.remove({_id: 1234})...`
-
-##Step 4: Testing your api
+##Step 4: Testing your API
 Make sure all operations are working as expected
 
-##Step 5: Create an angular app that can consume this data
+##Step 5: Create an angular app that can consume this API
 
-##Step 6: Displaying Data
 Create templates for viewing lists and individual detailed resources
 
 * Create templates for viewing the following:
@@ -95,7 +69,7 @@ Create templates for viewing lists and individual detailed resources
 * Once your templates and angular routing is done, load the pages to see if you're retrieving data
 
 ##Step 7: Modifying Data
-Integrate forms within your angular app to create/modify/delete Products and Customers
+Integrate the logic within your angular app to create/modify/delete Products and Customers
 
 * Create and 'edit' template for the following:
   * products
@@ -109,12 +83,11 @@ The edit will first GET the details to populate the form fields and then do a PU
 
 ##Step 8: If you have time, make it pretty using bootstrap, another library, or design it yourself
 
-#Day Three
-##Step 1: Indexing
+##Step 9: Indexing
 Add indexing for the email field on customer and the name field on products. This will make our api calls much quicker in the future as the application and data grow.
 
-##Step 2: Add more ways to query
-Exapand on the query function in the product service layer that we built to use _id and name.
+##Step 10: Add more ways to query
+Expand on the controllers that we built to be able to query by name as well as _id.
 
 On your `GET /products` add a query string parameter called `query` that will include key words that you define. 
 
