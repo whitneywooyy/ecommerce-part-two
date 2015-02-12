@@ -1,15 +1,16 @@
-ecommerce-day-two (updated see [Day Three](#day-three) below)
+ecommerce-day-two
 =================
 
 ## Objectives
 
 Combine what we've learned about the front-end with our new mongo knowledge to create our ecommerce website.
 
-##Resources
+## Resources
 * [migrate] (https://github.com/tj/node-migrate)
 * [mongoose] (https://github.com/LearnBoost/mongoose)
 
-##Step 1: Seed Products - using migrations
+## Step 1: Seed Products - using migrations
+
 Seed at least 3 products
 
 * Install migrate globally `npm i migrate -g`
@@ -118,6 +119,7 @@ Exapand on the query function in the product service layer that we built to use 
 On your `GET /products` add a query string parameter called `query` that will include key words that you define. 
 
 These queries are based on the following objects in mongo:
+
 ```json
 [
     {
@@ -145,6 +147,7 @@ The following request:
 `http://localhost:8888/products?query=name-contains:iPhone+max-price:200.00` 
 
 Should return:
+
 ```json
 {
     "_id": "544818a3eb501040088f381a",
