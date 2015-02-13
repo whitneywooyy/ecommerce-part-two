@@ -1,4 +1,4 @@
-eCommerce Project - Day 2
+eCommerce Project - Part II
 =================
 
 ## Objectives
