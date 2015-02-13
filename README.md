@@ -56,8 +56,6 @@ app.delete('/customers/:id', CustomerController.deleteCustomer);
 ### Step 3: Testing your API
 Make sure all operations are working as expected
 
-## (Day Three)
-
 ### Step 4: Create an angular app that can consume this API
 
 Create templates for viewing lists and individual detailed resources
