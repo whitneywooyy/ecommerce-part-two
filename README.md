@@ -3,23 +3,33 @@ eCommerce Project - Part II
 
 ## Objectives
 
-Continue creating a full-stack e-commerce application.
+The purpose of this application is to build a simple backend using Node, Express, and MongoDB (via MongoJS) and connect it to a simple front-end Angular application.
+
+During this project you will practice using an ORM (Mongoose) to work with your database.  You will also solidify your understanding of models, schemas, middleware, and indexing.
 
 ## Resources
-* [migrate] (https://github.com/tj/node-migrate)
+* [Mongoose] (http://mongoosejs.com/)
 
-### Step 1: Seed Products - using migrations
+## The Domain
 
-Let's use the handy migrate module to seed a product into your DB.
+Most companies sell some sort of product and service. For this project we will simulate buidling an eCommerce application. We will finish this project over the next two days.
 
-* Install migrate globally `npm i migrate -g`
-* Navigate to the root of your application
-* Run `migrate create add-product` in your terminal at the root of your application
-* A new file called 00*-add-product.js should have been created within /migrations
-* `require` the module in your code where you initialize your mongoose connection
-* `require` your Product module
-* Create and save your new products in the `exports.up` function - use [this gist](https://gist.github.com/cahlan/c5e1f30964599f80d92e) as a guide for how you could do your migration.
-* Run `migrate` when complete to automatically seed your data in Mongo.
+Today you are going to convert our current Mongo functionality to use Mongoose.  You will be creating a Product model and replacing our current product functionality with that model.  You will also be creating a user model.  You'll use MongoDB's indexing feature so we can quickly grab users. If you have time, you'll also integrate authentication and the Mongoose model hooks/middleware.
+
+Use this README for instructions today, but use your codebase and push to your repository from day one.
+
+### Step 1: Set up Mongoose
+
+At your application's root folder, run the following command via command line: `npm uninstall --save mongojs`.  This will remove mongojs from your node_modules folder and from your package.json.  Remove or comment out any logic related to MongoJS.
+
+**Breakpoint**: After removing everything MongoJS related, you should be able to start up your server and run it without any errors.
+
+After MongoJS is removed, install Mongoose and follow the [instructions](http://mongoosejs.com/docs/connections.html) to connect to MongoDB.  In your code, connect to Mongo after your Express app has started listening.
+
+**Breakpoint**: After setting up Mongoose, you should be able to listen with your Express app and with Mongoose.  The Mongoose connection method takes a callback as the last argument.  That callback sends one argument, `error`.  `console.log` the `error` parameter.  If it's undefined, you've connected correctly. (This is very wordy.  Ask a mentor for clarification if you can't figure out how to test this).
+
+
+# THIS IS WHERE I LAST WAS.
 
 ### Step 2: Create CRUD (Create, Retrieve, Update, Delete) api routes for your mongo resources
 
