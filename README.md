@@ -14,7 +14,7 @@ During this project you will practice using an ORM (Mongoose) to work with your 
 
 Most companies sell some sort of product and service. For this project we will simulate buidling an eCommerce application. We will finish this project over the next two days.
 
-Today you are going to convert our current Mongo functionality to use Mongoose.  You will be creating a Product model and replacing our current product functionality with that model.  You will also be creating a user model.  You'll use MongoDB's indexing feature so we can quickly grab users. If you have time, you'll also integrate authentication and the Mongoose model hooks/middleware.
+Today you are going to convert the current Mongo functionality to use Mongoose.  You will be creating a Product model and replacing the current product functionality with that model.  You will also be creating a user model.  You'll use MongoDB's indexing feature to be able to quickly grab users. If you have time, you'll also integrate authentication and the Mongoose model hooks/middleware.
 
 Use this README for instructions today, but use your codebase and push to your repository from day one.
 
@@ -26,7 +26,7 @@ At your application's root folder, run the following command via command line: `
 
 After MongoJS is removed, install Mongoose and follow the [instructions](http://mongoosejs.com/docs/connections.html) to connect to MongoDB.  In your code, connect to Mongo after your Express app has started listening.
 
-**Breakpoint**: After setting up Mongoose, you should be able to listen with your Express app and with Mongoose.  The Mongoose connection method takes a callback as the last argument.  That callback sends one argument, `error`.  `console.log` the `error` parameter.  If it's undefined, you've connected correctly. (This is very wordy.  Ask a mentor for clarification if you can't figure out how to test this).
+**Breakpoint**: After setting up Mongoose, you should be able to listen with your Express app and with Mongoose.  The Mongoose connection method takes a callback as the last argument.  That callback sends one argument, `error`.  `console.log` the `error` parameter.  If it's undefined, you've connected correctly. See [this](http://stackoverflow.com/questions/6676499/is-there-a-mongoose-connect-error-callback) SO answer for an example.
 
 
 # THIS IS WHERE I LAST WAS.
