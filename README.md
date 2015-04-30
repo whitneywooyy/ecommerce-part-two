@@ -29,39 +29,25 @@ After MongoJS is removed, install Mongoose and follow the [instructions](http://
 **Breakpoint**: After setting up Mongoose, you should be able to listen with your Express app and with Mongoose.  The Mongoose connection method takes a callback as the last argument.  That callback sends one argument, `error`.  `console.log` the `error` parameter.  If it's undefined, you've connected correctly. See [this SO](http://stackoverflow.com/questions/6676499/is-there-a-mongoose-connect-error-callback) answer for an example.
 
 
-# THIS IS WHERE I LAST WAS.
+### Step 2: Create Product Model
 
-### Step 2: Create CRUD (Create, Retrieve, Update, Delete) api routes for your mongo resources
+Remove or comment out the logic from your endopints that handle creating, reading, updating, and deleting products.  You are going to create a Mongoose Product model and do your CRUD actions that way.
 
-* Install and require your dependencies
+Create a new Product schema and model.  Give it the following fields:
 
-* In your server.js, set up your route endpoints:
+ - **Title**: This will be the title of the product
+  - String
+  - Unique
+  - Required
+  - Index
+ - **Description**: This will describe your product
+  - String
+  - Required
+ - **Price**: This will be the price of your product
+  - Number
+  - Required
 
-####/products
-GET
-POST
-
-####/products/:id
-GET
-PUT
-DELETE
-
-####/customers
-GET
-POST
-
-####/customers/:id
-GET
-PUT
-DELETE
-
-* Create controllers for each model in a "controllers" folder (e.g. "CustomerController, ProductController", etc)
-* Connect controller functions for each CRUD operation to routes in your server.js file. For example, 
-
-```javascript
-app.get('/customers/:id', CustomerController.getCustomer);
-app.delete('/customers/:id', CustomerController.deleteCustomer);
-```
+Feel free to add any additional fields you feel are necessary.
 
 ### Step 3: Testing your API
 Make sure all operations are working as expected
