@@ -25,77 +25,10 @@ mongoose.connect(mongoUri,function(err){
 	});
 })
 
-app.get('/api/products', function(req, res){
-	var query = {};
-	if(req.query.id) {
-		query._id = mongo.ObjectId(req.query.id);
-	}
-	if(req.query.title){
-		query.title = req.query.title;
-	}
-	
-	
-	/*
-	db.products.find(query, function(err, response){
-		if(err) {
-			res.status(500).json(err);
-		} else {
-			res.json(response);
-		}
-	});
-`*/
+app.get('/api/products', productCtrl.get);
 
-});
+app.post('/api/products', productCtrl.post);
 
-app.post('/api/products', function(req, res){
-	
-	/*
-	db.products.save(req.body, function(error, response){
-		if(error) {
-			return res.status(500).json(error);
-		} else {
-			return res.json(response);
-		}
-	});
-	*/
+app.put('/api/products', productCtrl.put);
 
-});
-
-app.put('/api/products', function(req, res){
-	if(!req.query.id){
-		return res.status(400).send('id query needed');
-	}
-	var query = {
-		_id: mongo.ObjectId(req.query.id)
-	};
-	
-	/*
-	db.products.update(query, req.body, function(error, response){
-		if(error) {
-			return res.status(500).json(error);
-		} else {
-			return res.json(response);
-		}
-	});
-	*/
-
-});
-
-app.delete('/api/products', function(req, res){
-	if(!req.query.id){
-		return res.status(400).send('id query needed');
-	};
-	var query = {
-		_id: mongo.ObjectId(req.query.id)
-	};
-
-	/*
-	db.products.remove(query, function(error, response){
-		if(error) {
-			return res.status(500).json(error);
-		} else {
-			return res.json(response);
-		}
-	});
-	*/
-});
+app.delete('/api/products', productCtrl.delete);
