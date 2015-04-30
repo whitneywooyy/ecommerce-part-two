@@ -77,6 +77,8 @@ Create a User model with the following fields:
 
 Add the Cart and Orders field to the model, but don't worry about configuring or using them today.  We will use them in tomorrow's project.
 
+Use Mongoose's [middleware](http://mongoosejs.com/docs/middleware.html) to generate and save a hash for the user's password. The best hook would likely be pre-save.  You can use a library like [bcrypt](https://www.npmjs.com/package/bcrypt) or [bcrypt-nodejs](https://www.npmjs.com/package/bcrypt-nodejs) to generate the hash.
+
 Don't connect the user to an API yet.  We will do that in the next step.
 
 **Breakpoint**:  While we don't have the user model hooked up to an API, we can still test it.  Take the user model and create a new user, either in the server file or in the User file.  If you reset your server, it will run the code and create a new user.  Comment out the code and check RoboMongo to ensure that the user was created successfully.
