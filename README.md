@@ -46,6 +46,7 @@ Create a new Product schema and model.  Give it the following fields:
  - **Price**: This will be the price of your product
   - Number
   - Required
+  - Minimum of 0
 
 Feel free to add any additional fields you feel are necessary.
 
