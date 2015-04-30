@@ -53,87 +53,41 @@ Now go to each of your product endpoints and put the necessary Mongoose logic to
 
 *NOTE*: Remember to keep your code looking clean and neat.  It would be wise for you to outsource the logic from each of your endpoints to a product controller or something similar.  You should also outsource your schema and model declarations to a Product file.  If you need more guidance on how Node's require and export system works, check out [this](http://openmymind.net/2012/2/3/Node-Require-and-Exports/) blog post.
 
-**Breakpoint**: At this point you should be able to manipulate the product data via your Express endpoints just like you could when MongoJS was installed.  Test this using POSTMan and the command line or RoboMongo.
+**Breakpoint**: At this point you should be able to manipulate the product data via your Express endpoints just like you could when MongoJS was installed.  Test this using POSTMan and the command line or RoboMongo.  After you test the endpoints, go to your front-end product interface (if you were able to build it yesterday) and make sure that the interface still works and manipulates the data like you expect. You may have to update your data models on the front-end to match the model we just set up with Mongoose.
 
-### Step 3: Testing your API
-Make sure all operations are working as expected
+### Step 3: Create User Model
 
-### Step 4: Create an angular app that can consume this API
+Create a User model with the following fields:
 
-Create templates for viewing lists and individual detailed resources
+ - **Name**: The user's name
+  - String
+  - Required
+ - **Email**: The user's email
+  - String
+  - Required
+  - Unique
+  - Index
+ - **Password**: A hash of the user's password
+  - String
+  - Required
+ - **Cart**: The user's cart, where they can store items
+  - Array
+ - **Orders**: All of the orders a user has made
+  - Array
 
-* Create templates for viewing the following:
-  * list of products showing only the name and price
-  * list of customers showing only the name
-  * detailed view for each product
-  * detailed view for each customer
+Add the Cart and Orders field to the model, but don't worry about configuring or using them today.  We will use them in tomorrow's project.
 
-* Once your templates and angular routing is done, load the pages to see if you're retrieving data
+Don't connect the user to an API yet.  We will do that in the next step.
 
-### Step 5: Modifying Data
-Integrate the logic within your angular app to create/modify/delete Products and Customers
+**Breakpoint**:  While we don't have the user model hooked up to an API, we can still test it.  Take the user model and create a new user, either in the server file or in the User file.  If you reset your server, it will run the code and create a new user.  Comment out the code and check RoboMongo to ensure that the user was created successfully.
 
-* Create and 'edit' template for the following:
-  * products
-  * customers
+If you pass the last breakpoint, then you have successfully migrated your code to Monoose.  Using an ORM like Mongoose will help to maintain your app's data integrity.  This is an essential step in building a scalable application.
 
-The 'edit' template will be shared between the create and edit of these pages. The only difference is the angular controller behind the templates. 
+The next two steps will integrate your backend to the front-end application that you built yesterday.  You will also expand the application to include new functionality.
 
-Create an angular controller for creating and one for editing.
-The create will POST when the 'Create' button is clicked.
-The edit will first GET the details to populate the form fields and then do a PUT when the 'Save' button is clicked.
+### Step 4: Add authentication
 
-### Step 6: If you have time, make it pretty using bootstrap, another library, or design it yourself
 
-### Step 7: Indexing
-Add indexing for the email field on customer and the name field on products. This will make our api calls much quicker in the future as the application and data grow.
 
-### Step 8: Add more ways to query
-Expand on the controllers that we built to be able to query by name as well as _id.
+### Step 5: Connect Front-End
 
-On your `GET /products` add a query string parameter called `query` that will include key words that you define. 
-
-These queries are based on the following objects in mongo:
-
-```json
-[
-    {
-        "_id": "5447e176e28406c36bbe9d2a",
-        "name": "iPhone 6 Plus",
-        "description": "Our best iPhone - now HUGER!",
-        "price": 269.99,
-        "__v": 0,
-        "active": true
-    },
-    {
-        "_id": "544818a3eb501040088f381a",
-        "name": "iPhone 6",
-        "description": "Our best iPhone - now as big as android",
-        "price": 199.99,
-        "__v": 0,
-        "active": true
-    }
-]
-```
-Below are some examples of a request you might support - yours do not have to be in this format:
-
-The following request: 
-
-`http://localhost:8888/products?query=name-contains:iPhone+max-price:200.00` 
-
-Should return:
-
-```json
-{
-    "_id": "544818a3eb501040088f381a",
-    "name": "iPhone 6",
-    "description": "Our best iPhone - now as big as android",
-    "price": 199.99,
-    "__v": 0,
-    "active": true
-}
-```
-
-* Support querying products given a min or max price or both min and max prices
-* Support searching for products by name - if I have a product named iPhone 6 I should be able to retrieve it if I pass in iPhone or 6
-* Add other querying that you think would be helpful to your users
