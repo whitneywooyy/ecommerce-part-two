@@ -84,7 +84,7 @@ Don't connect the user to your Express API.  You will use the User model later o
 
 If you pass the last breakpoint, then you have successfully migrated your code to Monoose.  Using an ORM like Mongoose will help to maintain your app's data integrity.  This is an essential step in building a scalable application.
 
-The next two steps will integrate your backend to the front-end application that you built yesterday.  You will also expand the application to include new functionality.
+The next two steps will introduce authentication and then integrate your backend to the front-end application that you built yesterday.  You will also expand the application to include new functionality.
 
 ### Step 4: Add authentication
 
@@ -97,6 +97,12 @@ Use Mongoose's [middleware](http://mongoosejs.com/docs/middleware.html) to gener
 **Breakpoint**: Create a new user and check to see that the user's password is begin saved to the database as a hash, and not as the user's actual password.
 
 Now that you've hashed your user's password corretly, you'll need to create a method on the user to compare the password when the user tries to log in.  You can add any method to a model by adding it like so `ModelName.methods.methodName = function() {};`.  Create the method and use bycrypt's [compare](https://www.npmjs.com/package/bcrypt#async-recommended) functionality to see if they sent the correct password when signing in.
+
+**Breakpoint**: Test to make sure your password check method works.  Hard code in your server.js (or any other file) a lookup to find a user, then call the method on that user.  Make sure it returns `true` if the passwords match and `false` if they don't.
+
+Now your Mongoose logic should be set up  to work well with authenticaton.  The rest of the project consists of integrating this code with concepts that you've already learned.  The instructions will be very hands-off. Feel free to solve these problems how you like.  Refer to previous projects for examples.
+
+Use Express and Passport (and/or any other libraries you like) to set up a local authentication strategy.  When a user authenticates for the first time, save their information to the database via the User model. Some useful methods are [`findOne`](http://mongoosejs.com/docs/api.html#query_Query-findOne) and [`findOneAndUpdate`](http://mongoosejs.com/docs/api.html#query_Query-findOneAndUpdate).
 
 ### Step 5: Connect Front-End
 
