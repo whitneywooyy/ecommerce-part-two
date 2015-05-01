@@ -3,135 +3,114 @@ eCommerce Project - Part II
 
 ## Objectives
 
-Continue creating a full-stack e-commerce application.
+The purpose of this application is to build a simple backend using Node, Express, and MongoDB (via MongoJS) and connect it to a simple front-end Angular application.
+
+During this project you will practice using an ORM (Mongoose) to work with your database.  You will also solidify your understanding of models, schemas, middleware, and indexing.
 
 ## Resources
-* [migrate] (https://github.com/tj/node-migrate)
+* [Mongoose] (http://mongoosejs.com/)
+* [Bcrypt](https://www.npmjs.com/package/bcrypt) or [Bcrypt-nodejs](https://www.npmjs.com/package/bcrypt-nodejs) for Windows users
 
-### Step 1: Seed Products - using migrations
+## The Domain
 
-Let's use the handy migrate module to seed a product into your DB.
+Most companies sell some sort of product and service. For this project we will simulate buidling an eCommerce application. We will finish this project over the next two days.
 
-* Install migrate globally `npm i migrate -g`
-* Navigate to the root of your application
-* Run `migrate create add-product` in your terminal at the root of your application
-* A new file called 00*-add-product.js should have been created within /migrations
-* `require` the module in your code where you initialize your mongoose connection
-* `require` your Product module
-* Create and save your new products in the `exports.up` function - use [this gist](https://gist.github.com/cahlan/c5e1f30964599f80d92e) as a guide for how you could do your migration.
-* Run `migrate` when complete to automatically seed your data in Mongo.
+Today you are going to convert the current Mongo functionality to use Mongoose.  You will be creating a Product model and replacing the current product functionality with that model.  You will also be creating a user model.  You'll use MongoDB's indexing feature to be able to quickly grab users. If you have time, you'll also integrate authentication and the Mongoose model hooks/middleware.
 
-### Step 2: Create CRUD (Create, Retrieve, Update, Delete) api routes for your mongo resources
+Use this README for instructions today, but use your codebase and push to your repository from day one.
 
-* Install and require your dependencies
+### Step 1: Set up Mongoose
 
-* In your server.js, set up your route endpoints:
+At your application's root folder, run the following command via command line: `npm uninstall --save mongojs`.  This will remove mongojs from your node_modules folder and from your package.json.  Remove or comment out any logic related to MongoJS.
 
-####/products
-GET
-POST
+**Breakpoint**: After removing everything MongoJS related, you should be able to start up your server and run it without any errors.
 
-####/products/:id
-GET
-PUT
-DELETE
+After MongoJS is removed, install Mongoose and follow the [instructions](http://mongoosejs.com/docs/connections.html) to connect to MongoDB.  In your code, connect to Mongo after your Express app has started listening.
 
-####/customers
-GET
-POST
+**Breakpoint**: After setting up Mongoose, you should be able to listen with your Express app and with Mongoose.  The Mongoose connection method takes a callback as the last argument.  That callback sends one argument, `error`.  `console.log` the `error` parameter.  If it's undefined, you've connected correctly. See [this SO](http://stackoverflow.com/questions/6676499/is-there-a-mongoose-connect-error-callback) answer for an example.
 
-####/customers/:id
-GET
-PUT
-DELETE
 
-* Create controllers for each model in a "controllers" folder (e.g. "CustomerController, ProductController", etc)
-* Connect controller functions for each CRUD operation to routes in your server.js file. For example, 
+### Step 2: Create Product Model
 
-```javascript
-app.get('/customers/:id', CustomerController.getCustomer);
-app.delete('/customers/:id', CustomerController.deleteCustomer);
-```
+Remove or comment out the logic from your endopints that handle creating, reading, updating, and deleting products.  You are going to create a Mongoose Product model and do your CRUD actions that way.
 
-### Step 3: Testing your API
-Make sure all operations are working as expected
+Create a new Product schema and model.  Give it the following fields:
 
-### Step 4: Create an angular app that can consume this API
+ - **Title**: This will be the title of the product
+  - String
+  - Unique
+  - Required
+  - Index
+ - **Description**: This will describe your product
+  - String
+  - Required
+ - **Price**: This will be the price of your product
+  - Number
+  - Required
+  - Minimum of 0
 
-Create templates for viewing lists and individual detailed resources
+Feel free to add any additional fields you feel are necessary.
 
-* Create templates for viewing the following:
-  * list of products showing only the name and price
-  * list of customers showing only the name
-  * detailed view for each product
-  * detailed view for each customer
+Now go to each of your product endpoints and put the necessary Mongoose logic to [Create](http://mongoosejs.com/docs/api.html#model_Model.create), [Read](http://mongoosejs.com/docs/api.html#model_Model.find), [Update](http://mongoosejs.com/docs/api.html#model_Model.update) and [Delete](http://mongoosejs.com/docs/api.html#model_Model.remove) products. Refer to those links for documentation.
 
-* Once your templates and angular routing is done, load the pages to see if you're retrieving data
+*NOTE*: Remember to keep your code looking clean and neat.  It would be wise for you to outsource the logic from each of your endpoints to a product controller or something similar.  You should also outsource your schema and model declarations to a Product file.  If you need more guidance on how Node's require and export system works, check out [this](http://openmymind.net/2012/2/3/Node-Require-and-Exports/) blog post.
 
-### Step 5: Modifying Data
-Integrate the logic within your angular app to create/modify/delete Products and Customers
+**Breakpoint**: At this point you should be able to manipulate the product data via your Express endpoints just like you could when MongoJS was installed.  Test this using POSTMan and the command line or RoboMongo.  After you test the endpoints, go to your front-end product interface (if you were able to build it yesterday) and make sure that the interface still works and manipulates the data like you expect. You may have to update your data models on the front-end to match the model we just set up with Mongoose.
 
-* Create and 'edit' template for the following:
-  * products
-  * customers
+### Step 3: Create User Model
 
-The 'edit' template will be shared between the create and edit of these pages. The only difference is the angular controller behind the templates. 
+Create a User model with the following fields:
 
-Create an angular controller for creating and one for editing.
-The create will POST when the 'Create' button is clicked.
-The edit will first GET the details to populate the form fields and then do a PUT when the 'Save' button is clicked.
+ - **Name**: The user's name
+  - String
+  - Required
+ - **Email**: The user's email
+  - String
+  - Required
+  - Unique
+  - Index
+ - **Password**: A hash of the user's password
+  - String
+  - Required
+ - **Cart**: The user's cart, where they can store items
+  - Array
+ - **Orders**: All of the orders a user has made
+  - Array
 
-### Step 6: If you have time, make it pretty using bootstrap, another library, or design it yourself
+Add the Cart and Orders field to the model, but don't worry about configuring or using them today.  You will use them in tomorrow's project.
 
-### Step 7: Indexing
-Add indexing for the email field on customer and the name field on products. This will make our api calls much quicker in the future as the application and data grow.
+Don't connect the user to your Express API.  You will use the User model later on.
 
-### Step 8: Add more ways to query
-Expand on the controllers that we built to be able to query by name as well as _id.
+**Breakpoint**:  While we don't have the user model hooked up to an API, we can still test it.  Take the user model and create a new user, either in the server file or in the User file.  If you reset your server, it will run the code and create a new user.  Comment out the code and check RoboMongo to ensure that the user was created successfully.
 
-On your `GET /products` add a query string parameter called `query` that will include key words that you define. 
+If you pass the last breakpoint, then you have successfully migrated your code to Monoose.  Using an ORM like Mongoose will help to maintain your app's data integrity.  This is an essential step in building a scalable application.
 
-These queries are based on the following objects in mongo:
+The next two steps will introduce authentication and then integrate your backend to the front-end application that you built yesterday.  You will also expand the application to include new functionality.
 
-```json
-[
-    {
-        "_id": "5447e176e28406c36bbe9d2a",
-        "name": "iPhone 6 Plus",
-        "description": "Our best iPhone - now HUGER!",
-        "price": 269.99,
-        "__v": 0,
-        "active": true
-    },
-    {
-        "_id": "544818a3eb501040088f381a",
-        "name": "iPhone 6",
-        "description": "Our best iPhone - now as big as android",
-        "price": 199.99,
-        "__v": 0,
-        "active": true
-    }
-]
-```
-Below are some examples of a request you might support - yours do not have to be in this format:
+### Step 4: Add authentication
 
-The following request: 
+In this step you will introduce authentication to your applicatoin.  You'll need to add some more functionality to your user model.  You will need to hash a password before saving it, and create a method that will check to see if a given string matches that user's password.  Then you will introduce local authentication using passport and sessions.
 
-`http://localhost:8888/products?query=name-contains:iPhone+max-price:200.00` 
+While going through this step, feel free to reference [this](http://devsmash.com/blog/password-authentication-with-mongoose-and-bcrypt) blog post.  It covers almost exactly what you'll be doing in this step.
 
-Should return:
+Use Mongoose's [middleware](http://mongoosejs.com/docs/middleware.html) to generate and save a hash for the user's password. The best hook would likely be pre-save.  You can use a library like [bcrypt](https://www.npmjs.com/package/bcrypt) or [bcrypt-nodejs](https://www.npmjs.com/package/bcrypt-nodejs) to generate the hash.
 
-```json
-{
-    "_id": "544818a3eb501040088f381a",
-    "name": "iPhone 6",
-    "description": "Our best iPhone - now as big as android",
-    "price": 199.99,
-    "__v": 0,
-    "active": true
-}
-```
+**Breakpoint**: Create a new user and check to see that the user's password is begin saved to the database as a hash, and not as the user's actual password.
 
-* Support querying products given a min or max price or both min and max prices
-* Support searching for products by name - if I have a product named iPhone 6 I should be able to retrieve it if I pass in iPhone or 6
-* Add other querying that you think would be helpful to your users
+Now that you've hashed your user's password corretly, you'll need to create a method on the user to compare the password when the user tries to log in.  You can add any method to a model by adding it like so `ModelName.methods.methodName = function() {};`.  Create the method and use bycrypt's [compare](https://www.npmjs.com/package/bcrypt#async-recommended) functionality to see if they sent the correct password when signing in.
+
+**Breakpoint**: Test to make sure your password check method works.  Hard code in your server.js (or any other file) a lookup to find a user, then call the method on that user.  Make sure it returns `true` if the passwords match and `false` if they don't.
+
+Now your Mongoose logic should be set up  to work well with authenticaton.  The rest of the project consists of integrating this code with concepts that you've already learned.  The instructions will be very hands-off. Feel free to solve these problems how you like.  Refer to previous projects for examples.
+
+Use Express and Passport (and/or any other libraries you like) to set up a local authentication strategy.  When a user authenticates for the first time, save their information to the database via the User model. Some useful methods are [`findOne`](http://mongoosejs.com/docs/api.html#query_Query-findOne) and [`findOneAndUpdate`](http://mongoosejs.com/docs/api.html#query_Query-findOneAndUpdate).
+
+### Step 5: Connect Front-End
+
+Connect your front-end to your server.  Again, you are free to do this how you like.  It would be a good idea to a a register/login page and a dashboard page where the user can see their information and (in the future) their cart and orders.
+
+**Breakpoint**: You should now be able to register, login, and maintain user state on your front-end.
+
+If you have extra time, make sure that you have an interface where users can view products and add them to their cart.  Tomorrow you'll add the actual functionality, but it will give you a head start if you can build the interface today.
+
+Once you've finished the front-end, take some time to style your app and make it user-friendly.  Tomorrow you will finish the app by adding a a cart to the user, allow them to check out, and keep track of their current and past orders.
