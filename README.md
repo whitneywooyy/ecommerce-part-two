@@ -9,6 +9,7 @@ During this project you will practice using an ORM (Mongoose) to work with your 
 
 ## Resources
 * [Mongoose] (http://mongoosejs.com/)
+* [Bcrypt](https://www.npmjs.com/package/bcrypt) or [Bcrypt-nodejs](https://www.npmjs.com/package/bcrypt-nodejs) for Windows users
 
 ## The Domain
 
@@ -112,4 +113,4 @@ Connect your front-end to your server.  Again, you are free to do this how you l
 
 If you have extra time, make sure that you have an interface where users can view products and add them to their cart.  Tomorrow you'll add the actual functionality, but it will give you a head start if you can build the interface today.
 
-Once you've finished the front-end, take some time to style your app and make it user-friendly.  Tomorrow we will finish the app by adding a a cart to the user, allow them to check out, and keep track of their current and past orders.
+Once you've finished the front-end, take some time to style your app and make it user-friendly.  Tomorrow you will finish the app by adding a a cart to the user, allow them to check out, and keep track of their current and past orders.
