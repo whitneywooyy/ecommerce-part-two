@@ -106,3 +106,10 @@ Use Express and Passport (and/or any other libraries you like) to set up a local
 
 ### Step 5: Connect Front-End
 
+Connect your front-end to your server.  Again, you are free to do this how you like.  It would be a good idea to a a register/login page and a dashboard page where the user can see their information and (in the future) their cart and orders.
+
+**Breakpoint**: You should now be able to register, login, and maintain user state on your front-end.
+
+If you have extra time, make sure that you have an interface where users can view products and add them to their cart.  Tomorrow you'll add the actual functionality, but it will give you a head start if you can build the interface today.
+
+Once you've finished the front-end, take some time to style your app and make it user-friendly.  Tomorrow we will finish the app by adding a a cart to the user, allow them to check out, and keep track of their current and past orders.
