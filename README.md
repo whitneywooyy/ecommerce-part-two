@@ -76,11 +76,9 @@ Create a User model with the following fields:
  - **Orders**: All of the orders a user has made
   - Array
 
-Add the Cart and Orders field to the model, but don't worry about configuring or using them today.  We will use them in tomorrow's project.
+Add the Cart and Orders field to the model, but don't worry about configuring or using them today.  You will use them in tomorrow's project.
 
-Use Mongoose's [middleware](http://mongoosejs.com/docs/middleware.html) to generate and save a hash for the user's password. The best hook would likely be pre-save.  You can use a library like [bcrypt](https://www.npmjs.com/package/bcrypt) or [bcrypt-nodejs](https://www.npmjs.com/package/bcrypt-nodejs) to generate the hash.
-
-Don't connect the user to your Express API.  We will use the User model later on.
+Don't connect the user to your Express API.  You will use the User model later on.
 
 **Breakpoint**:  While we don't have the user model hooked up to an API, we can still test it.  Take the user model and create a new user, either in the server file or in the User file.  If you reset your server, it will run the code and create a new user.  Comment out the code and check RoboMongo to ensure that the user was created successfully.
 
@@ -90,7 +88,15 @@ The next two steps will integrate your backend to the front-end application that
 
 ### Step 4: Add authentication
 
+In this step you will introduce authentication to your applicatoin.  You'll need to add some more functionality to your user model.  You will need to hash a password before saving it, and create a method that will check to see if a given string matches that user's password.  Then you will introduce local authentication using passport and sessions.
 
+While going through this step, feel free to reference [this](http://devsmash.com/blog/password-authentication-with-mongoose-and-bcrypt) blog post.  It covers almost exactly what you'll be doing in this step.
+
+Use Mongoose's [middleware](http://mongoosejs.com/docs/middleware.html) to generate and save a hash for the user's password. The best hook would likely be pre-save.  You can use a library like [bcrypt](https://www.npmjs.com/package/bcrypt) or [bcrypt-nodejs](https://www.npmjs.com/package/bcrypt-nodejs) to generate the hash.
+
+**Breakpoint**: Create a new user and check to see that the user's password is begin saved to the database as a hash, and not as the user's actual password.
+
+Now that you've hashed your user's password corretly, you'll need to create a method on the user to compare the password when the user tries to log in.  You can add any method to a model by adding it like so `ModelName.methods.methodName = function() {};`.  Create the method and use bycrypt's [compare](https://www.npmjs.com/package/bcrypt#async-recommended) functionality to see if they sent the correct password when signing in.
 
 ### Step 5: Connect Front-End
 
