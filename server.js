@@ -8,7 +8,7 @@ var port = 9001;
 var mongoUri = 'localhost:27017/ecommerce';
 
 var productCtrl = require('./product-controller.js');
-
+var User = require('./User.js');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -32,3 +32,4 @@ app.post('/api/products', productCtrl.post);
 app.put('/api/products', productCtrl.put);
 
 app.delete('/api/products', productCtrl.delete);
+

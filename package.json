@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/jacob-israel-turner/ecommerce-day-one",
   "dependencies": {
+    "bcrypt": "^0.8.2",
     "body-parser": "^1.12.3",
     "cors": "^2.6.0",
     "express": "^4.12.3",
