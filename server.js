@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 
 // CONTROLLERS
 var ProductCtrl = require('./controllers/ProductCtrl');	// Don't need .js at the end
+// var UserCtrl = require('./controllers/UserCtrl');
 
 // SERVER VARIABLES
 var app = express();
@@ -24,6 +25,7 @@ app.post('/product', ProductCtrl.create);	// Referencing SightingCtrl.create in 
 app.get('/product', ProductCtrl.read);
 app.put('/product/:id', ProductCtrl.update);
 app.delete('/product/:id', ProductCtrl.delete);
+// app.post('/test', ProductCtrl.test);
 
 // CONNECTIONS
 var port = 6789;

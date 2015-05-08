@@ -88,6 +88,7 @@ Don't connect the user to your Express API.  You will use the User model later o
 If you pass the last breakpoint, then you have successfully migrated your code to Monoose.  Using an ORM like Mongoose will help to maintain your app's data integrity.  This is an essential step in building a scalable application.
 
 The next two steps will introduce authentication and then integrate your backend to the front-end application that you built yesterday.  You will also expand the application to include new functionality.
+// DONE
 
 ### Step 4: Add authentication
 

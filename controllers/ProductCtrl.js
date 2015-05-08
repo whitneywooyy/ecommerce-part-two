@@ -1,4 +1,5 @@
 var Product = require('../models/Product');	// Doesn't need .js
+var User = require('../models/User');
 
 module.exports = {
 	create: function(req, res){
@@ -34,4 +35,11 @@ module.exports = {
 		});
 		// res.send('delete test');
 	}
+	// test: function(req, res){
+	// 	var newUser = new User(req.body);
+	// 	newUser.save(function(err, result){
+	// 		if (err) return res.status(500).send(err);
+	// 		else res.send(result);
+	// 	})
+	// }
 }
